@@ -1,13 +1,13 @@
 // AddRoutineModal.styles.js
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
-const inputHeight = height * 0.06;
+const inputHeight = height * 0.09;
 const fontSize = width * 0.05;
 const labelFontSize = width * 0.042;
 const buttonHeight = height * 0.06;
-const sidePadding = width * 0.08;
+const sidePadding = width * 0.075;
 const modalRadius = width * 0.06;
 const boxRadius = width * 0.04;
 const colonFontSize = width * 0.085;
@@ -24,13 +24,16 @@ const styles = StyleSheet.create({
   },
 
   modalContainer: {
-    minHeight: height * 0.45,
-    maxHeight: height * 0.6,
+    // minHeight: height * 0.45,
+    // maxHeight: height * 0.6,
     width: '100%',
-    maxWidth: 400,
+    // maxWidth: 650,
     backgroundColor: '#FFFFFF',
     borderRadius: modalRadius,
     padding: sidePadding,
+    maxHeight: height * 0.85,
+    alignSelf: 'center',
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.1,
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: height * 0.025,
-    paddingTop: height * 0.01,
+    // paddingTop: height * 0.01,
   },
   modalTitle: {
     fontSize: fontSize,
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
 
   // 박스 안 텍스트 원래 스타일로 복원
   timeText: {
-    fontSize: width * 0.1,
+    fontSize: Math.max(18, width * 0.085), // 작은 기기 대응
     fontWeight: '400',
     includeFontPadding: false,
     textAlignVertical: 'center',
@@ -126,11 +129,23 @@ const styles = StyleSheet.create({
     borderColor: '#7A73FF',
     backgroundColor: '#FFFFFF',
     borderRadius: boxRadius,
-    paddingHorizontal: sidePadding,
     marginBottom: height * 0.04,
     fontSize: width * 0.04,
     textAlign: 'center',
     color: '#1A1A1A',
+    ...Platform.select({
+      ios: {
+        // iOS에서는 패딩 제거 후 화면 전체 너비에서 중앙 정렬
+        alignSelf: 'stretch',
+        paddingHorizontal: width * 0.08,
+        paddingVertical: height * 0.02,
+      },
+      android: {
+        // Android는 기존 패딩 유지 + 수직 중앙 정렬
+        paddingHorizontal: sidePadding,
+        textAlignVertical: 'center',
+      },
+    }),
   },
   modalAddButton: {
     width: '90%',
@@ -141,6 +156,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     marginTop: height * 0.01,
+    marginBottom: height * 0.015,
     shadowColor: '#8B5CF6',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,

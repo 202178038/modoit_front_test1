@@ -167,14 +167,14 @@ export default function FeedbackCalendarPage({ navigation }) {
     return `${yy}.${mm}.${dd}`;
   };
 
-   // ─── 상단 텍스트 동적 설정 (progress에 따라 메시지 변경) ───
+  // ─── 상단 텍스트 동적 설정 (progress에 따라 메시지 변경) ───
   const feedbackTitle =
     progress <= 33
       ? '좀 더 노력하세요!'
       : progress <= 66
       ? '지금도 괜찮아요!'
       : '이대로만 하면 돼요!';
-      
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -188,13 +188,19 @@ export default function FeedbackCalendarPage({ navigation }) {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={onPrevMonth}>
-            <Text style={styles.navArrowText}>{'< '}</Text>
+            <Image
+              source={require('../../assets/images/arrow1.png')} // 왼쪽 화살표 이미지
+              style={styles.arrow}
+            />
           </TouchableOpacity>
           <Text style={styles.monthText}>
             {monthNames[currentDate.getMonth()]}
           </Text>
           <TouchableOpacity onPress={onNextMonth}>
-            <Text style={styles.navArrowText}>{' >'}</Text>
+            <Image
+              source={require('../../assets/images/arrow2.png')} // 오른쪽 화살표 이미지
+              style={styles.arrow}
+            />
           </TouchableOpacity>
         </View>
 
@@ -247,8 +253,15 @@ export default function FeedbackCalendarPage({ navigation }) {
         <View style={styles.feedbackCard}>
           <View style={styles.titleRow}>
             <Text style={styles.feedbackTitle}>{feedbackTitle}</Text>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <Text style={styles.arrowIcon}>{'>'}</Text>
+            <TouchableOpacity
+              onPress={() => setModalVisible(true)}
+              style={styles.arrowWrapper}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Image
+                source={require('../../assets/images/arrow3.png')} // 오른쪽 화살표 이미지
+                style={styles.arrowIcon}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.centered}>
