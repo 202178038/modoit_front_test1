@@ -18,7 +18,7 @@ export default {
       supportsTablet: true,
     },
     android: {
-      package: "com.AISL.Modoit", // ✅ 여기에 추가!
+      package: "com.aisl.modoit", // ✅ 여기에 추가!
       versionCode: 1, // ← 이거 명시하는 걸 권장!
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
